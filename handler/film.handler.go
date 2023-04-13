@@ -160,7 +160,7 @@ func FilmHandlerDelete(ctx *fiber.Ctx) error {
 	})
 }
 
-func CommentControllerGetComments(ctx *fiber.Ctx) error {
+func CommentHandlerGetComments(ctx *fiber.Ctx) error {
 	filmId := ctx.QueryInt("filmId")
     var film []entity.Film
     err := database.DB.Raw(`
@@ -176,7 +176,7 @@ func CommentControllerGetComments(ctx *fiber.Ctx) error {
 	return ctx.JSON(film)
 }
 
-func CommentControllerCreate(ctx *fiber.Ctx) error {
+func CommentHandlerCreate(ctx *fiber.Ctx) error {
 	Comment := new(request.CommentCreateRequest)
 	if err := ctx.BodyParser(Comment); err != nil {
 		return err
@@ -210,7 +210,7 @@ func CommentControllerCreate(ctx *fiber.Ctx) error {
 	})
 }
 
-func CommentControllerDelete(ctx *fiber.Ctx) error {
+func CommentHandlerDelete(ctx *fiber.Ctx) error {
 	commentid := ctx.Params("id")
 	var comment entity.Comment
 
