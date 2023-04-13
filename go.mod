@@ -10,9 +10,11 @@ require (
 	gorm.io/gorm v1.24.6
 )
 
+require github.com/lib/pq v1.10.7 // indirect
+
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect

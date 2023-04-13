@@ -4,6 +4,10 @@ import (
 	"gofiber-api-gorm/database"
 	"gofiber-api-gorm/migration"
 	"gofiber-api-gorm/route"
+	//"database/sql"
+	//"fmt"
+	//"github.com/lib/pq"
+
 	"github.com/gofiber/fiber/v2"
 )
 

@@ -1,6 +1,6 @@
 package request
 
 type LoginRequest struct {
-	Name 		string `json:"name" validate:"required"`
-	KodeFilm	string `json:"kode_film"`
+	Email 		string `json:"email" validate:"required,email"`
+	Password	string `json:"password" validate:"required"`
 }

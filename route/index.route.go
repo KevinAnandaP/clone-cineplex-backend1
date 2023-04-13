@@ -10,19 +10,27 @@ import (
 
 
 func RouteInit(r *fiber.App) {
-	r.Get("/", func(ctx *fiber.Ctx) error {
-
-		return ctx.JSON(fiber.Map{
-			"hello": "world",
-		})
-	})
 	r.Static("/public", config.ProjectRootPath+"/public/asset")
 
 	r.Post("/login", handler.LoginHandler)
 
-	r.Get("/film", middleware.Auth, handler.FilmHandlerRead)
+	r.Get("/film", handler.FilmHandlerRead)
 	r.Post("/film", handler.FilmHandlerCreate)
 	r.Get("/film/:id", handler.FilmHandlerGetById)
 	r.Put("/film/:id", handler.FilmHandlerUpdate)
 	r.Delete("/film/:id", handler.FilmHandlerDelete)
+	r.Get("theater/theaterlist", handler.FilmHandlerGetByTheaterId)
+
+	r.Get("/user", middleware.Auth, handler.UserHandlerRead)
+	r.Get("/user/:id", handler.UserHandlerGetById)
+	r.Post("/user", handler.UserHandlerCreate)
+	r.Put("/user/:id", handler.UserHandlerUpdate)
+	r.Put("/user/:id/update-email", handler.UserHandlerUpdateEmail)
+	r.Delete("/user/:id", handler.UserHandlerDelete)
+
+	r.Get("/theater", handler.TheaterHandlerRead)
+	r.Post("/theater", handler.TheaterHandlerCreate)
+	r.Get("/theater/:kota", handler.TheaterHandlerGetById)
+	r.Put("/theater/:kota", handler.TheaterHandlerUpdate)
+	r.Delete("/theater/:kota", handler.TheaterHandlerDelete)
 }
