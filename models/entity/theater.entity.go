@@ -12,5 +12,5 @@ type TheaterDetails struct {
 	Kota	string `json:"kota"`
 	Theater string `json:"theater"`
 	Phone	string `json:"phone"`
-	Film
+	Film	[]TheaterId `json:"film"`
 }

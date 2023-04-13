@@ -53,3 +53,13 @@ type TheaterUpdateRequest struct {
 	Theater		string `json:"theater"`
 	Phone		string `json:"phone"`
 }
+
+type TheaterListRequest struct {
+	TheaterID	uint `json:"theater_id"`
+	FilmID		uint `json:"film_id"`
+}
+
+type CommentCreateRequest struct {
+	FilmID    uint      `json:"film_id"`
+	Comment   string    `json:"comment"`
+}

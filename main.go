@@ -16,7 +16,7 @@ func main() {
 	database.DatabaseInit()
 	migration.RunMigration()
 	app := fiber.New()
-
+	
 	// INITAL ROUTE
 	route.RouteInit(app)
 

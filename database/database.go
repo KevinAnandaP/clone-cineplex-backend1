@@ -2,8 +2,17 @@ package database
 
 import (
 	"fmt"
-	"gorm.io/driver/mysql"
+	//"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+)
+
+const (
+	host = "db.vjpgdoelfnmgwmpdokkn.supabase.co"
+	port = 5432
+	user = "postgres"
+	password = "SuretyBond2023!"
+	dbname = "Cineplex_Team_1"
 )
 
 var DB *gorm.DB
@@ -11,9 +20,9 @@ var DB *gorm.DB
 func DatabaseInit() {
 	var err error
 
-	const MYSQL = "root:@tcp(127.0.0.1:3306)/cobafilm?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := MYSQL
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	dsn := fmt.Sprintf("host=%s port=%d user=%s " + "password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	
 	if err != nil {
 		panic("Could not Connect to database")
 	}
