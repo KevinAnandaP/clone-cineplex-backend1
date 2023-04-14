@@ -164,7 +164,7 @@ func CommentHandlerGetComments(ctx *fiber.Ctx) error {
 	filmId := ctx.QueryInt("filmId")
     var film []entity.Film
     err := database.DB.Raw(`
-		SELECT f.id, f.name, f.jenis_film, f. produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like, c.comment
+		SELECT f.id, f.name, f.jenis_film, f.produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like, c.comment
 		FROM films f
 		INNER JOIN comments c ON c.film_id = f.id
 		WHERE c.film_id = ?`, filmId).Scan(&film)

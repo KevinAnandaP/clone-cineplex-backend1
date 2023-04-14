@@ -33,7 +33,7 @@ type TheaterId struct {
 
 type Comment struct {
 	ID        uint      `json:"id" gorm:"primary key"`
-	FilmID    uint      `json:"film_Id"`
+	FilmID    uint      `json:"film_id"`
 	Film      Film      `gorm:"foreignKey:FilmID"`
 	Comment   string    `json:"comment"`
 	CreatedAt time.Time `json:"created_at"`
