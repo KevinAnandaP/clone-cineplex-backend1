@@ -1,5 +1,9 @@
 package request
 
+import (
+	//"gofiber-api-gorm/models/entity"
+)
+
 type FilmCreateRequest struct {
 	Name 		string `json:"name" validate:"required"` 
 	JenisFilm 	string `json:"jenis_film" validate:"required"`
@@ -10,6 +14,16 @@ type FilmCreateRequest struct {
 	Casts		string `json:"casts" validate:"required"`
 	Sinopsis	string `json:"sinopsis" validate:"required"`
 	Like		uint `json:"like"`
+	Cover 		string `json:"cover"`
+}
+
+type GetAllFilmRequest struct {
+	AuthorID  *int64  `query:"filterAuthorId"`
+	Search    *string `query:"search"`
+	Page      int     `query:"page"`
+	PageSize  int     `query:"pageSize"`
+	OrderBy   string  `query:"orderBy"`
+	OrderType string  `query:"orderType"`
 }
 
 type FilmUpdateRequest struct {

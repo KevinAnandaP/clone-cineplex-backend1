@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"gofiber-api-gorm/models/pg"
 	"time"
 )
 
@@ -15,6 +16,12 @@ type Film struct {
 	Casts     string `json:"casts"`
 	Sinopsis  string `json:"sinopsis"`
 	Like      uint   `json:"like"`
+	Cover	  string `json:"cover"`
+}
+
+type GetAllFilmResponse struct {
+	Films		[]Film `json:"films"`
+	Pagination  *pg.PaginationResponse `json:"pagination"`
 }
 
 type TheaterId struct {

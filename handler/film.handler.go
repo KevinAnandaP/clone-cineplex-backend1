@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"gofiber-api-gorm/database"
 	"gofiber-api-gorm/models/entity"
 	"gofiber-api-gorm/models/request"
@@ -62,34 +63,48 @@ func FilmHandlerCreate(ctx *fiber.Ctx) error {
 	errValidate := validate.Struct(film)
 	if errValidate != nil {
 		return ctx.Status(400).JSON(fiber.Map{
-			"message": "failed to validate",
+			"message": "gagal",
 			"error":   errValidate.Error(),
 		})
 	}
 
-	newFilm := entity.Film{
-		Name:      film.Name,
-		JenisFilm: film.JenisFilm,
-		Produser:  film.Produser,
-		Sutradara: film.Sutradara,
-		Penulis:   film.Penulis,
-		Produksi:  film.Produksi,
-		Casts:     film.Casts,
-		Sinopsis:  film.Sinopsis,
-		Like:      film.Like,
-	}
+	//HANDLE FILE
+    file, errFile := ctx.FormFile("cover")
+    if errFile != nil {
+        log.Println("Error File: ", errFile)
+    }
 
-	errCreateUser := database.DB.Create(&newFilm).Error
-	if errCreateUser != nil {
-		return ctx.Status(500).JSON(fiber.Map{
-			"message": "failed to create user",
-		})
-	}
+    filename := file.Filename
 
-	return ctx.JSON(fiber.Map{
-		"message": "successfully",
-		"data":    newFilm,
-	})
+    errSaveFile := ctx.SaveFile(file, fmt.Sprintf("./public/asset/%s", filename))
+    if errSaveFile != nil {
+        log.Println("File gagal disimpan")
+    }
+
+    newFilm := entity.Film{
+        Name:     film.Name,
+        JenisFilm: film.JenisFilm,
+        Produser:  film.Produser,
+        Sutradara: film.Sutradara,
+        Penulis:   film.Penulis,
+        Produksi:  film.Produksi,
+        Casts:     film.Casts,
+        Sinopsis:  film.Sinopsis,
+		Like: 	   film.Like,
+        Cover:     filename,
+    }
+
+    errCreateFilm := database.DB.Create(&newFilm).Error
+    if errCreateFilm != nil {
+        return ctx.Status(500).JSON(fiber.Map{
+            "message": "Tidak berhasil menyimpan data",
+        })
+    }
+
+    return ctx.JSON(fiber.Map{
+        "message": "Berhasil",
+        "data":    newFilm,
+    })
 }
 
 func FilmHandlerUpdate(ctx *fiber.Ctx) error {
@@ -233,3 +248,4 @@ func CommentHandlerDelete(ctx *fiber.Ctx) error {
 		"message": "comment deleted",
 	})
 }
+
